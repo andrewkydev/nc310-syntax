@@ -1,0 +1,14 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "BSNC Embedded Colors",
+  "type": "dark",
+  "tokenColors": [
+    { "scope": "entity.name.function.triplecode.bsnc", "settings": { "foreground": "#FF69B4" } },
+    { "scope": "constant.numeric.triplecode-arg.bsnc", "settings": { "foreground": "#40E0D0" } },
+    { "scope": "variable.other.e-variable.bsnc", "settings": { "foreground": "#FFD700" } },
+    { "scope": "support.function.mcode.bsnc", "settings": { "foreground": "#FFA500" } },
+    { "scope": "constant.numeric.mcode-value.bsnc", "settings": { "foreground": "#40E0D0" } },
+    { "scope": "keyword.control.cycle.rpt.start.bsnc", "settings": { "foreground": "#FFFFFF", "background": "#FF4500", "fontStyle": "bold" } },
+    { "scope": "keyword.control.cycle.rpt.end.bsnc", "settings": { "foreground": "#FFFFFF", "background": "#228B22", "fontStyle": "bold" } }
+  ]
+}

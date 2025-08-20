@@ -1,0 +1,425 @@
+{
+  "scopeName": "source.bsnc",
+  "patterns": [
+    {
+      "include": "#lineComments"
+    },
+    {
+      "include": "#tripleCodes"
+    },
+    {
+      "include": "#uao"
+    },
+    {
+      "include": "#ucg"
+    },
+    {
+      "include": "#variablesE"
+    },
+    {
+      "include": "#toolChange"
+    },
+    {
+      "include": "#spindleWithM"
+    },
+    {
+      "include": "#gMoves"
+    },
+    {
+      "include": "#coords"
+    },
+    {
+      "include": "#cycles"
+    },
+    {
+      "include": "#gArcs"
+    },
+    {
+      "include": "#arcParams"
+    },
+    {
+      "include": "#mCodes"
+    },
+    {
+      "include": "#rptCycle"
+    },
+    {
+      "include": "#gCodesValid"
+    },
+    {
+      "include": "#comments"
+    }
+  ],
+  "repository": {
+    "lineComments": {
+      "patterns": [
+        {
+          "match": ";.*$",
+          "name": "comment.line.semicolon.bsnc"
+        }
+      ]
+    },
+    "tripleCodes": {
+      "patterns": [
+        {
+          "begin": "(\\()([A-Z]{3})",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.begin.nc310"
+            },
+            "2": {
+              "name": "entity.name.function.triplecode.nc310"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.parens.end.nc310"
+            }
+          },
+          "patterns": [
+            {
+              "match": ",",
+              "name": "punctuation.separator.comma.nc310"
+            },
+            {
+              "match": "\"[^\"]*\"",
+              "name": "string.quoted.double.nc310"
+            },
+            {
+              "match": "'[^']*'",
+              "name": "string.quoted.single.nc310"
+            },
+            {
+              "match": "(E\\d+)",
+              "name": "variable.other.e-variable.nc310"
+            },
+            {
+              "match": "([XYZ])([-+]?\\d+(?:\\.\\d+)?)",
+              "captures": {
+                "1": {
+                  "name": "variable.parameter.axis.nc310"
+                },
+                "2": {
+                  "name": "constant.numeric.axis-value.nc310"
+                }
+              }
+            },
+            {
+              "match": "([-+]?\\d+(?:\\.\\d+)?)",
+              "name": "constant.numeric.triplecode-arg.nc310"
+            }
+          ]
+        }
+      ]
+    },
+    "uao": {
+      "patterns": [
+        {
+          "match": "\\((UAO),(\\-?\\d+(?:\\.\\d+)?)\\)",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.uao.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.uao-value.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "ucg": {
+      "patterns": [
+        {
+          "match": "\\((UCG),(\\-?\\d+(?:\\.\\d+)?),([XYZ])([-+]?\\d+(?:\\.\\d+)?)([XYZ])([-+]?\\d+(?:\\.\\d+)?),([XYZ])([-+]?\\d+(?:\\.\\d+)?),(\\-?\\d+(?:\\.\\d+)?),(\\-?\\d+(?:\\.\\d+)?)\\)",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.ucg.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.ucg-main.bsnc"
+            },
+            "3": {
+              "name": "variable.parameter.axis.bsnc"
+            },
+            "4": {
+              "name": "constant.numeric.axis-value.bsnc"
+            },
+            "5": {
+              "name": "variable.parameter.axis.bsnc"
+            },
+            "6": {
+              "name": "constant.numeric.axis-value.bsnc"
+            },
+            "7": {
+              "name": "variable.parameter.axis.bsnc"
+            },
+            "8": {
+              "name": "constant.numeric.axis-value.bsnc"
+            },
+            "9": {
+              "name": "constant.numeric.ucg-extra.bsnc"
+            },
+            "10": {
+              "name": "constant.numeric.ucg-extra.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "mCodes": {
+      "patterns": [
+        {
+          "match": "\\b(M)(0?[0-9]{1,2})\\b",
+          "captures": {
+            "1": {
+              "name": "support.function.mcode.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.mcode-value.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "variablesE": {
+      "patterns": [
+        {
+          "match": "\\b(E\\d+)(=)([-+]?[0-9]+(?:\\.[0-9]+)?)\\b",
+          "captures": {
+            "1": {
+              "name": "variable.other.e-variable.bsnc"
+            },
+            "2": {
+              "name": "keyword.operator.assignment.bsnc"
+            },
+            "3": {
+              "name": "constant.numeric.e-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "\\b(E\\d+)\\b",
+          "captures": {
+            "1": {
+              "name": "variable.other.e-variable.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "toolChange": {
+      "patterns": [
+        {
+          "match": "\\b(T\\d+)(\\.\\d+)?(M6)\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.tool-number.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.tool-offset.bsnc"
+            },
+            "3": {
+              "name": "support.function.mcode.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "spindleWithM": {
+      "patterns": [
+        {
+          "match": "\\b(S)([0-9]+(?:\\.[0-9]+)?)(?:\\s*|)(M)(0?[0-9]{1,2})\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.spindle-speed.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.spindle-speed-value.bsnc"
+            },
+            "3": {
+              "name": "support.function.mcode.bsnc"
+            },
+            "4": {
+              "name": "constant.numeric.mcode-value.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "gMoves": {
+      "patterns": [
+        {
+          "match": "(G0)(?=[XYZF]|$)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.motion.rapid.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(G1)(?=[XYZEF]|$)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.motion.linear.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "gArcs": {
+      "patterns": [
+        {
+          "match": "(G2)(?=[XYZRIJEF]|$)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.motion.arc.cw.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(G3)(?=[XYZRIJEF]|$)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.motion.arc.ccw.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "arcParams": {
+      "patterns": [
+        {
+          "match": "([XYZ])([-+]?[0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.axis.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.axis-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "([IJ])([-+]?[0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.arc-center.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.arc-center-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(R)([-+]?[0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.arc-radius.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.arc-radius-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(F)([0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.feedrate.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.feedrate-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(E\\d+)",
+          "captures": {
+            "1": {
+              "name": "variable.other.e-variable.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "coords": {
+      "patterns": [
+        {
+          "match": "([XYZ])([-+]?[0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.axis.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.axis-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(F)([0-9]+(?:\\.[0-9]+)?)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.feedrate.bsnc"
+            },
+            "2": {
+              "name": "constant.numeric.feedrate-value.bsnc"
+            }
+          }
+        },
+        {
+          "match": "(E\\d+)",
+          "captures": {
+            "1": {
+              "name": "variable.other.e-variable.bsnc"
+            }
+          }
+        }
+      ]
+    },
+    "cycles": {
+      "patterns": [
+        {
+          "name": "keyword.control.cycle.rpt.bsnc",
+          "match": "\\(RPT\\s*,?\\s*E?\\d*\\)"
+        },
+        {
+          "name": "keyword.control.cycle.urt.bsnc",
+          "match": "\\(URT\\s*,?\\s*\\d*\\)"
+        },
+        {
+          "name": "keyword.control.cycle.erp.bsnc",
+          "match": "\\(ERP\\)"
+        }
+      ]
+    },
+    "rptCycle": {
+      "patterns": [
+        {
+          "match": "\\(RPT\\s*,?\\s*E?\\d*\\)",
+          "name": "keyword.control.cycle.rpt.start.bsnc"
+        },
+        {
+          "match": "\\(ERP\\)",
+          "name": "keyword.control.cycle.rpt.end.bsnc"
+        }
+      ]
+    },
+    "gCodesValid": {
+      "patterns": [
+        {
+          "match": "\\b(G(?:0[0-9]|1|2|3|4|6|9|17|18|19|20|21|27|28|29|33|34|35|40|41|42|70|71|72|73|74|79|80|81|82|83|84|85|86|89|90|91|93|94|95|96|97))\\b",
+          "name": "keyword.control.gcode.valid.bsnc"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "match": "\\([^A-Z]{3}.*?\\)",
+          "name": "comment.block.bsnc"
+        }
+      ]
+    }
+  }
+}
