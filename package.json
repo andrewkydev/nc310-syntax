@@ -2,8 +2,12 @@
   "name": "nc310-syntax",
   "displayName": "Balt-System PLC Syntax",
   "description": "Подсветка, цвета и сниппеты Baltsystem PLC",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "andrewkydev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewkydev/nc310-syntax"
+  },
   "pricing": "Free",
   "engines": {
     "vscode": "^1.45.0"

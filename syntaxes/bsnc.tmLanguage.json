@@ -48,9 +48,74 @@
     },
     {
       "include": "#comments"
-    }
+    },
+    { "include": "#mathFunctions" },
+    { "include": "#branchCodes" }
   ],
   "repository": {
+    "branchCodes": {
+  "patterns": [
+    {
+      "begin": "\\((BNC|BGT|BLT|BEQ|BNE|BGE|BLE)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.branch.bsnc" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.section.parens.end.bsnc" }
+      },
+      "patterns": [
+        { "match": ",", "name": "punctuation.separator.comma.bsnc" },
+        { "match": "(E\\d+)", "name": "variable.other.e-variable.bsnc" },
+        { "match": "[A-Z_][A-Z0-9_]*", "name": "entity.name.label.bsnc" },
+        { "match": "[-+]?\\d+(?:\\.\\d+)?", "name": "constant.numeric.branch-arg.bsnc" }
+      ]
+    }
+  ]
+},
+    "mathFunctions": {
+      "patterns": [
+        {
+          "begin": "\\b(SIN|COS|TAN|ARS|ARC|ART|SQR|ABS|INT|NEG|MOD|FEL)\\s*\\(",
+          "beginCaptures": {
+            "1": {
+              "name": "support.function.math.bsnc"
+            },
+            "0": {
+              "name": "punctuation.section.parens.begin.bsnc"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.parens.end.bsnc"
+            }
+          },
+          "patterns": [
+            {
+              "match": ",",
+              "name": "punctuation.separator.comma.bsnc"
+            },
+            {
+              "match": "/",
+              "name": "keyword.operator.divide.bsnc"
+            },
+            {
+              "match": "(E\\d+)",
+              "name": "variable.other.e-variable.bsnc"
+            },
+            {
+              "match": "[-+]?\\d+(?:\\.\\d+)?",
+              "name": "constant.numeric.math-arg.bsnc"
+            },
+            {
+              "match": "[A-Z]",
+              "name": "variable.parameter.math-symbol.bsnc"
+            }
+          ]
+        }
+      ]
+    },
     "lineComments": {
       "patterns": [
         {
